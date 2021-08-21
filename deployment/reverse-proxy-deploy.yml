@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-proxy-deploy
+  labels:
+    app: reverse-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: simple-reverse-proxy
+    spec:
+      containers:
+      - name: simple-reverse-proxy
+        image: scharati/simple-reverse-proxy
+        ports:
+        - containerPort: 8080
